@@ -15,10 +15,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-/**
- * Persisted record of a notification sent. One row is stored per successful sending,
- * forming the history exposed by {@code GET /notifications}.
- */
+
 @Entity
 @Table(name = "notifications")
 @Getter

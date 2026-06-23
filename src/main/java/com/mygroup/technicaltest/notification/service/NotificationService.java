@@ -13,10 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.List;
 
-/**
- * Orchestrates a notification send: validates the channel, dispatches to the matching
- * provider, and persists the send to the history.
- */
+
 @Service
 public class NotificationService {
 
@@ -52,7 +49,6 @@ public class NotificationService {
         return NotificationResponse.from(repository.save(notification));
     }
 
-    /** Returns the full notification history, newest first. */
     @Transactional(readOnly = true)
     public List<NotificationResponse> list() {
         return repository.findAllByOrderByCreatedAtDesc().stream()

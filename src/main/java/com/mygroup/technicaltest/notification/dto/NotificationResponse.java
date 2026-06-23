@@ -4,9 +4,6 @@ import com.mygroup.technicaltest.notification.model.Notification;
 
 import java.time.Instant;
 
-/**
- * Public representation of a stored notification, returned by both endpoints.
- */
 public record NotificationResponse(
         Long id,
         String userId,

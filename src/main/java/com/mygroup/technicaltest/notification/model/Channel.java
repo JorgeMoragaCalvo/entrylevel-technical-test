@@ -5,10 +5,7 @@ import com.mygroup.technicaltest.notification.exception.InvalidChannelException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * Supported notification channels. The {@code channel} request parameter is matched
- * against these values (case-insensitively) via {@link #fromValue(String)}.
- */
+
 public enum Channel {
     EMAIL,
     SMS;

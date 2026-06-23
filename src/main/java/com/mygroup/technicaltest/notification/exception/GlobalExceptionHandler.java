@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Translates domain and validation errors into consistent JSON error responses.
- */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
