@@ -125,5 +125,4 @@ La ruta de escritura de `POST /notifications`: validación de campos obligatorio
 - **Entrada sin límites** — la longitud de `message` y el tamaño del payload solo están débilmente restringidos.
 - **Crecimiento ilimitado del historial** — `GET` devuelve toda la tabla sin paginación.
 - **Sin idempotencia** — un POST reintentado crea envíos duplicados.
-- **Credenciales de BD en texto plano** en `application.properties` — deberían provenir de secretos/variables de entorno.
 - **Acoplamiento de canales** — solo `email`/`sms`; los nuevos canales requieren un (pequeño) cambio de código + despliegue.
