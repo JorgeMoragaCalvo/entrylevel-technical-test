@@ -1,0 +1,128 @@
+{
+  "info": {
+    "name": "Notifications API - Technical Test",
+    "description": "Collection to exercise POST /notifications and GET /notifications. Set the {{baseUrl}} collection variable (default http://localhost:8080).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "POST /notifications - email (201)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"123\",\n  \"message\": \"Hola\",\n  \"channel\": \"email\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/notifications", "host": [ "{{baseUrl}}" ], "path": [ "notifications" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 201', () => pm.response.to.have.status(201));",
+              "const body = pm.response.json();",
+              "pm.test('channel is email', () => pm.expect(body.channel).to.eql('email'));",
+              "pm.test('has id', () => pm.expect(body.id).to.not.be.undefined);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /notifications - sms (201)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"456\",\n  \"message\": \"Hi\",\n  \"channel\": \"sms\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/notifications", "host": [ "{{baseUrl}}" ], "path": [ "notifications" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 201', () => pm.response.to.have.status(201));",
+              "pm.test('channel is sms', () => pm.expect(pm.response.json().channel).to.eql('sms'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /notifications - invalid channel (400)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"123\",\n  \"message\": \"Hola\",\n  \"channel\": \"whatsapp\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/notifications", "host": [ "{{baseUrl}}" ], "path": [ "notifications" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 400', () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /notifications - missing message (400)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"123\",\n  \"channel\": \"email\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/notifications", "host": [ "{{baseUrl}}" ], "path": [ "notifications" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 400', () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /notifications (200)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/notifications", "host": [ "{{baseUrl}}" ], "path": [ "notifications" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('has data array', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
