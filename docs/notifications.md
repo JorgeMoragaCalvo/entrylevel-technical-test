@@ -99,12 +99,12 @@ curl localhost:8080/notifications
 
 #### GET /notifications
 
-| # | Caso              | Precondición                  | Esperado                              |
-|---|-------------------|-------------------------------|---------------------------------------|
-| 1 | Historial vacío   | sin envíos                    | 200, `{"data": []}`                   |
-| 2 | Devuelve envíos   | 2 POSTs previos               | 200, `data` tiene 2 elementos         |
-| 3 | Ordenamiento      | envíos en distintos momentos  | del más reciente al más antiguo       |
-| 4 | Forma de respuesta| cualquiera                    | los items tienen `userId, message, channel` |
+| # | Caso               | Precondición                 | Esperado                                    |
+|---|--------------------|------------------------------|---------------------------------------------|
+| 1 | Historial vacío    | sin envíos                   | 200, `{"data": []}`                         |
+| 2 | Devuelve envíos    | 2 POSTs previos              | 200, `data` tiene 2 elementos               |
+| 3 | Ordenamiento       | envíos en distintos momentos | del más reciente al más antiguo             |
+| 4 | Forma de respuesta | cualquiera                   | los items tienen `userId, message, channel` |
 
 ### Pruebas automatizadas
 

@@ -1,10 +1,10 @@
 #include <stdio.h>
 
 // Prototype of Functions
-void mergeSort(int *, int, int);
+void merge_sort(int *, int, int);
 void merge(int *, int, int, int);
-int removeDuplicates(int *, int);
-void printArray(int *, int);
+int remove_duplicates(int *, int);
+void print_array(int *, int);
 
 // Main Code
 int main(void) {
@@ -12,27 +12,27 @@ int main(void) {
     int size = sizeof(arr) / sizeof(arr[0]);
 
     printf("Original:\n");
-    printArray(arr, size);
+    print_array(arr, size);
 
-    mergeSort(arr, 0, size - 1);
+    merge_sort(arr, 0, size - 1);
 
-    size = removeDuplicates(arr, size);
+    size = remove_duplicates(arr, size);
 
     printf("\nOrdenado sin duplicados:\n");
-    printArray(arr, size);
+    print_array(arr, size);
 
     return 0;
 }
 
 // Functions
-void mergeSort(int *arr, int p, int r) {
+void merge_sort(int *arr, int p, int r) {
     if (p >= r)
         return;
 
     int q = (p + r) / 2;
 
-    mergeSort(arr, p, q);
-    mergeSort(arr, q + 1, r);
+    merge_sort(arr, p, q);
+    merge_sort(arr, q + 1, r);
     merge(arr, p, q, r);
 }
 
@@ -65,7 +65,7 @@ void merge(int *arr, int p, int q, int r) {
         arr[k++] = right[j++];
 }
 
-int removeDuplicates(int *arr, int size) {
+int remove_duplicates(int *arr, int size) {
     if (size == 0)
         return 0;
 
@@ -81,7 +81,7 @@ int removeDuplicates(int *arr, int size) {
     return j + 1;
 }
 
-void printArray(int *arr, int size) {
+void print_array(int *arr, int size) {
     for (int i = 0; i < size; i++)
         printf("%d ", arr[i]);
 
